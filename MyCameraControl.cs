@@ -10,7 +10,7 @@ using AForge.Video.DirectShow.Internals;
 
 namespace CameraPrefsApp
 {
-	class MyCameraConrol
+	class MyCameraControl
 	{
 		public VideoCaptureDevice Source;
 
@@ -19,7 +19,7 @@ namespace CameraPrefsApp
 
 		private String _name;
 
-		public MyCameraConrol(string name)
+		public MyCameraControl(string name)
 		{
 			_name = name;
 
@@ -57,9 +57,9 @@ namespace CameraPrefsApp
 			videoProcAmp = (IAMVideoProcAmp)Source.SourceObject;
         }
 
-		static public MyCameraConrol CreateFromPrefs(CameraPrefs prefs)
+		static public MyCameraControl CreateFromPrefs(CameraPrefs prefs)
 		{
-			MyCameraConrol newCamera = new MyCameraConrol(prefs.Name);
+			MyCameraControl newCamera = new MyCameraControl(prefs.Name);
             int red = 0;
             int green = 0;
             int blue = 0;

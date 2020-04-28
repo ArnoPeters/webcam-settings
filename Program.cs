@@ -15,15 +15,21 @@ namespace CameraPrefsApp
 
 		static void Main(string[] args)
 		{
-			Console.WriteLine("\nReading CameraPrefs.xml...");
-
 			String configPath = "CameraPrefs.xml";
 			if (args.Length >= 1)
 				configPath = args[0];
 
-			config = loadAndParseConfig(configPath);
+            Console.WriteLine("\nReading " + configPath + "\n");
+
+            config = loadAndParseConfig(configPath);
+
 			applyCameraSettings(config.Cameras);
-			applyTrueColorSetting(config.TrueColorEnabled);
+
+            // There is no LifeCam software for Windows 10
+            if (!isWindows10())
+            {
+                applyTrueColorSetting(config.TrueColorEnabled);
+            }
 		}
 
 		private static Configuration loadAndParseConfig(String pPath)
@@ -35,7 +41,7 @@ namespace CameraPrefsApp
 			catch (IOException pException)
 			{
 				TextWriter errorWriter = Console.Error;
-				errorWriter.WriteLine("\n  ERROR: Config not found at \"" + pPath + "\"");
+				errorWriter.WriteLine("\n  ERROR: Config not found at \"" + pPath + "\"" + " : " + pException.Message);
 				return null;
 			}
 		}
@@ -43,25 +49,37 @@ namespace CameraPrefsApp
 		private static void applyTrueColorSetting(Boolean pValue)
 		{
 			Console.WriteLine("\nApplying TrueColor setting to registry...");
+
 			RegistryKey hkcu = Registry.CurrentUser;
+
 			hkcu = hkcu.OpenSubKey("Software\\Microsoft\\LifeCam", true);
+
 			try
 			{
 				hkcu.SetValue("TrueColorOff", pValue ? 0 : 1);
 			}
 			catch (Exception pException)
 			{
-				Console.WriteLine("\n  ERROR: LifeCam entry not found. Is the LifeCam software installed?");
+                Console.WriteLine("\n  ERROR: LifeCam entry not found. Is the LifeCam software installed?\n\tError message: " + pException.Message);
 			}
 		}
 
-		private static void applyCameraSettings(CameraPrefs[] pCameraPrefsList)
+        static bool isWindows10()
+        {
+            var reg = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\Windows NT\CurrentVersion");
+
+            string productName = (string)reg.GetValue("ProductName");
+
+            return productName.StartsWith("Windows 10");
+        }
+
+        private static void applyCameraSettings(CameraPrefs[] pCameraPrefsList)
 		{
 			foreach (CameraPrefs cameraPrefs in pCameraPrefsList)
 			{
 				try
 				{
-					LifeCamCamera camera = LifeCamCamera.CreateFromPrefs(cameraPrefs);
+					MyCameraControl camera = MyCameraControl.CreateFromPrefs(cameraPrefs);
 				}
 				catch (Exception pException)
 				{

@@ -49,44 +49,61 @@ namespace CameraPrefsApp
 		[XmlAttribute("name")]
 		public String Name;
 
-		[XmlAttribute("autoExposure")]
+        [XmlAttribute("focus")]
+        public int Focus;
+
+        [XmlAttribute("autoFocus")]
+        public Boolean AutoFocus;
+
+        [XmlAttribute("exposure")]
+        public int Exposure;
+
+        [XmlAttribute("autoExposure")]
 		public Boolean AutoExposure;
 
-		[XmlAttribute("autoFocus")]
-		public Boolean AutoFocus;
+        [XmlAttribute("zoom")]
+        public int Zoom;
 
-		[XmlAttribute("autoWhiteBalance")]
-		public Boolean AutoWhiteBalance;
-		/*
-		*/
-
-		[XmlAttribute("focus")]
-		public int Focus;
-
-		[XmlAttribute("pan")]
+        [XmlAttribute("pan")]
 		public int Pan;
 
 		[XmlAttribute("tilt")]
 		public int Tilt;
 
-		[XmlAttribute("zoom")]
-		public int Zoom;
+        [XmlAttribute("iris")]
+        public int Iris;
 
-		[XmlAttribute("brightness")]
+        [XmlAttribute("roll")]
+        public int Roll;
+
+        [XmlAttribute("backlightCompensation")]
+        public int BacklightCompensation;
+
+        [XmlAttribute("brightness")]
 		public int Brightness;
 
-		[XmlAttribute("contrast")]
+        [XmlAttribute("colorEnable")]
+        public Boolean colorEnable;
+
+        [XmlAttribute("contrast")]
 		public int Contrast;
 
-		//[XmlAttribute("exposure")]
-		//public int Exposure;
+        [XmlAttribute("gain")]
+        public int Gain;
 
-		[XmlAttribute("saturation")]
+        [XmlAttribute("gamma")]
+        public int Gamma;
+
+        [XmlAttribute("hue")]
+        public int Hue;
+
+        [XmlAttribute("saturation")]
 		public int Saturation;
 
-		[XmlAttribute("whiteBalance")]
+        [XmlAttribute("sharpness")]
+        public int Sharpness;
+
+        [XmlAttribute("whiteBalance")]
 		public int WhiteBalance;
 	}
-
-
 }

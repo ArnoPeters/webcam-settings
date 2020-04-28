@@ -6,18 +6,18 @@
 	<cameras>
 	
 		<camera
-			name="Microsoft LifeCam Cinema"
+			name="Microsoft® LifeCam Studio(TM)"
 			autoFocus="false"
-			autoWhiteBalance="false"
-			
-			focus="2"
+			focus="15"
+      autoExposure="false"
+      exposure="-6"
 			zoom="0"
 			pan="0"
 			tilt="0"
-			
-			brightness="100"
-			whiteBalance="5300"
-			saturation="0"
+      backlightCompensation="0"
+			brightness="150"
+			whiteBalance="3900"
+			saturation="85"
 			/>
 
 	</cameras>
